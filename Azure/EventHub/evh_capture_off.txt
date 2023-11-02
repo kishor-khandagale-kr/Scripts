@@ -1,0 +1,9 @@
+despmisc-stage|product-catalog-applications
+krogercustomer-stage|klog
+krogercustomer-test|klog
+despmisc-test|product-catalog-applications
+krogercustomer-dev|klog
+despmisc-dev|product-catalog-applications
+despmisc-dev|rob-test
+despmisc-dev|sandbox-qsf
+krogercommerceplatform-dev|healthcheck

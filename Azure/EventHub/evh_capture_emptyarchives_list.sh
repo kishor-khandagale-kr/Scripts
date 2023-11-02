@@ -28,10 +28,17 @@ for i in $evh_namespaces
 do
     echo "namespace: $i"
 
+    #query to find evh with capture enabled and skip empty archives missing
     az eventhubs eventhub list --resource-group $AZ_RESOURCE_GROUP --namespace-name $i \
     | jq -rc --arg namespace "$i" '. [] 
     | select((.captureDescription != null) and (.captureDescription.skipEmptyArchives==null)) | ($namespace + "|" + .name )' \
     >> eventhubs_capture_skipemptyarchive_disable.txt
+
+    #query to find evh with capture disabled
+    # az eventhubs eventhub list --resource-group $AZ_RESOURCE_GROUP --namespace-name $i \
+    # | jq -rc --arg namespace "$i" '. [] 
+    # | select(.captureDescription == null) | ($namespace + "|" + .name )' \
+    # >> evh_capture_off.txt
 
 done
 
