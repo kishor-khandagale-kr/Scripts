@@ -32,7 +32,7 @@ do
     az eventhubs eventhub list --resource-group $AZ_RESOURCE_GROUP --namespace-name $i \
     | jq -rc --arg namespace "$i" '. [] 
     | select((.captureDescription != null) and (.captureDescription.skipEmptyArchives==null)) | ($namespace + "|" + .name )' \
-    >> eventhubs_capture_skipemptyarchive_disable.txt
+    >> evh.txt
 
     #query to find evh with capture disabled
     # az eventhubs eventhub list --resource-group $AZ_RESOURCE_GROUP --namespace-name $i \
