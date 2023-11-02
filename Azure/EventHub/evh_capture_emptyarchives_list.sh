@@ -1,10 +1,10 @@
 #! /bin/bash
 ##############################################################################################################
 # DMP team request to find all non production DESP EventHubs with capture missing skipEmptyArchives option.
-# Replace <service-credential> value
+# Replace <service-credential>, <service-principal> and <outputfile> value
 ##############################################################################################################
 
-AZ_SERVICE_PRINCIPAL='7096287e-1d17-46e8-b898-5d76a033c675'
+AZ_SERVICE_PRINCIPAL='<service-principal>'
 AZ_SERVICE_CREDENTIALS='<service-credential>'
 AZ_TENENT='8331e14a-9134-4288-bf5a-5e2c8412f074'
 AZ_RESOURCE_GROUP='rg-4620-desp-stg'
@@ -32,7 +32,7 @@ do
     az eventhubs eventhub list --resource-group $AZ_RESOURCE_GROUP --namespace-name $i \
     | jq -rc --arg namespace "$i" '. [] 
     | select((.captureDescription != null) and (.captureDescription.skipEmptyArchives==null)) | ($namespace + "|" + .name )' \
-    >> evh_capture_skipemptyarchive_disable.txt
+    >> <outputfile>
 
     #query to find evh with capture disabled
     # az eventhubs eventhub list --resource-group $AZ_RESOURCE_GROUP --namespace-name $i \
